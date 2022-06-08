@@ -8,7 +8,7 @@ services:
       - '6381:6379'
     volumes:
       - ./redis-rdb/redis.conf:/usr/local/etc/redis/redis.conf
-      - redisdb-rdb:/data/db
+      - ./data/redisdb-rdb:/data/db
     networks:
       - queues
 
@@ -20,7 +20,7 @@ services:
       - '6382:6379'
     volumes:
       - ./redis-aof/redis.conf:/usr/local/etc/redis/redis.conf
-      - redisdb-aof:/data/db
+      - ./data/redisdb-aof:/data/db
     networks:
       - queues
 
@@ -30,14 +30,9 @@ services:
     ports:
       - '11300:11300'
     volumes:
-      - beanstalkd_data:/var/lib/beanstald
+      - ./data/beanstalkd_data:/var/lib/beanstald
     networks:
       - queues
-
-volumes:
-  redisdb-rdb: {}
-  redisdb-aof: {}
-  beanstalkd_data: {}
 
 networks:
   queues:
